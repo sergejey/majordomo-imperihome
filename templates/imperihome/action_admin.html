@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-8">Use following URL for ImperiHome App:<br/>
+     <b>http://SERVER_ADDRESS/modules/imperihome.html</b>
+
+        <div  id='api_settings'>
+            &nbsp;
+            <h3><#LANG_SETUP#></h3>
+            <form action="?" method="post" enctype="multipart/form-data" name="frmEdit" class="form-horizontal">
+
+                    <div class="form-group">
+                        <div><input type="checkbox" name="api_debug" value="1" [#if API_DEBUG="1"#] checked[#endif#]> Save all requests to log file</div>
+                        &nbsp;<Br/>
+                        <button type="submit" name="subm" value="Submit" class="btn btn-primary"><#LANG_UPDATE#></button>
+                        <input type="hidden" name="view_mode" value="update_settings">
+                        <input type="hidden" name="mode" value="update">
+                    </div>
+
+            </form>
+        </div>
+
+    </div>
+    <div class="col-md-4 text-right">
+        <a href="http://www.evertygo.com/imperihome" target="_blank" class="btn btn-default btn-success"><i class="glyphicon glyphicon-globe"></i> <#LANG_MORE_INFO#> at ImperiHome</a></div>
+</div>
+
+[#if API_DEBUG="1"#]
+<hr>
+<div id="imperihome_debug"></div>
+<script type="text/javascript">
+    function updateImperihomeDebug() {
+        //$('#console_debug').html('mmm');
+        var url="<#ROOTHTML#>ajax/xray.html?op=getcontent&limit=20&file=imperihome";
+        $.ajax({
+            url: url,
+        }).done(function(data) {
+            $('#imperihome_debug').html(data);
+        });
+        consoleDebugTimer=setTimeout('updateImperihomeDebug()',1000);
+    }
+    updateImperihomeDebug();
+</script>
+[#endif#]
+
+
+
